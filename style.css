@@ -1,0 +1,727 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    background-color: #0d0d1a;
+    /* Dark base */
+    background-image: radial-gradient(circle at 20% 30%, rgba(0, 255, 255, 0.2) 0%, transparent 60%), radial-gradient(circle at 80% 70%, rgba(128, 0, 255, 0.2) 0%, transparent 60%), radial-gradient(circle at 50% 50%, rgba(255, 0, 255, 0.1) 0%, transparent 70%), linear-gradient(135deg, rgba(0, 255, 255, 0.05), rgba(255, 0, 255, 0.05)), url('https://www.transparenttextures.com/patterns/noise.png');
+    background-blend-mode: screen, screen, screen, normal, overlay;
+    background-size: cover;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Optional subtle grid overlay */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Optional vignette effect */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(circle, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.8) 100%);
+    z-index: -1;
+}
+
+.cursor {
+    display: inline-block;
+    background-color: #00f5ff;
+    width: 2px;
+    animation: blink 0.7s infinite;
+    margin-left: 2px;
+}
+
+@keyframes blink {
+
+    0%,
+    50%,
+    100% {
+        opacity: 1;
+    }
+
+    25%,
+    75% {
+        opacity: 0;
+    }
+}
+
+:root {
+    --neon: linear-gradient(90deg, #00f5ff, #7cff00);
+}
+
+.neon {
+    background: var(--neon);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.section {
+    padding: 100px 20px;
+    text-align: center;
+}
+
+.title {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.content {
+    max-width: 700px;
+    margin: auto;
+    color: #9ca3af;
+}
+
+.card,
+.project {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    padding: 30px;
+    border-radius: 20px;
+    transition: 0.4s;
+}
+
+.card:hover,
+.project:hover {
+    transform: translateY(-10px);
+}
+
+.btn {
+    padding: 12px 30px;
+    border-radius: 999px;
+    background: var(--neon);
+    color: #000;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #00f5ff, 0 0 20px #7cff00;
+}
+
+.input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    background: #111;
+    border: 1px solid #333;
+    color: #fff;
+}
+
+.skill-card {
+    min-width: 180px;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    text-align: center;
+    transition: 0.4s;
+}
+
+.skill-card:hover {
+    transform: translateY(-10px) scale(1.05);
+}
+
+.skill-card img,
+.skill-card svg {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+}
+
+.skill-card p {
+    margin-top: 15px;
+    font-weight: 600;
+}
+
+.btn-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--neon);
+    color: #000;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-neon {
+    padding: 12px 30px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #00f5ff, #7cff00);
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-neon:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px #00f5ff, 0 0 30px #7cff00;
+}
+
+.form-group {
+    position: relative;
+    margin-top: 1.5rem;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 14px 12px;
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 10px;
+    color: #fff;
+    outline: none;
+}
+
+.form-group label {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    color: #aaa;
+    pointer-events: none;
+    transition: 0.3s ease all;
+}
+
+.form-group input:focus+label,
+.form-group input:not(:placeholder-shown)+label,
+.form-group textarea:focus+label,
+.form-group textarea:not(:placeholder-shown)+label {
+    top: -8px;
+    left: 8px;
+    font-size: 0.85rem;
+    color: #00f5ff;
+    background: #111;
+    padding: 0 4px;
+}
+
+#loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: black;
+    transition: opacity 0.5s ease, visibility 0.5s;
+}
+
+.loader-neon {
+    color: #00f5ff;
+    text-shadow: 0 0 5px #00f5ff, 0 0 10px #00f5ff, 0 0 20px #00f5ff, 0 0 40px #7cff00, 0 0 80px #7cff00;
+    animation: flicker 1.5s infinite alternate;
+}
+
+@keyframes flicker {
+
+    0%,
+    50%,
+    100% {
+        opacity: 1;
+    }
+
+    25%,
+    75% {
+        opacity: 0.6;
+    }
+}
+
+.loader-bar-container {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 999px;
+}
+
+.loader-bar {
+    width: 0;
+    border-radius: 999px;
+    transition: width 0.2s ease;
+}
+
+.social-btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 50%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: #fff;
+}
+
+.social-btn svg {
+    width: 24px;
+    height: 24px;
+    transition: fill 0.3s ease;
+}
+
+.social-btn:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 15px #00f5ff, 0 0 30px #7cff00;
+    color: #00f5ff;
+}
+
+.scroll-btn {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 50%;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    color: #00f5ff;
+    box-shadow: 0 0 10px #00f5ff, 0 0 20px #7cff00;
+    animation: bounce 2s infinite;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.scroll-btn:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 20px #00f5ff, 0 0 40px #7cff00;
+}
+
+@keyframes bounce {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(10px);
+    }
+
+    60% {
+        transform: translateY(5px);
+    }
+}
+
+.open-to-work {
+    font-weight: bold;
+    font-size: 1rem;
+    text-transform: uppercase;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    animation: glow 1.5s infinite alternate;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.open-to-work .dot {
+    width: 10px;
+    height: 10px;
+    background: #00ff99;
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.7);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(0.7);
+        opacity: 0.5;
+    }
+}
+
+@keyframes glow {
+    0% {
+        box-shadow: 0 0 5px #00ff99, 0 0 10px #00ff99;
+    }
+
+    100% {
+        box-shadow: 0 0 15px #00ff99, 0 0 30px #00ff99;
+    }
+}
+
+.open-to-work span {
+    background: linear-gradient(90deg, #00f5ff, #7cff00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.nav-link {
+    position: relative;
+    color: #fff;
+    font-weight: 500;
+    text-decoration: none;
+    padding-bottom: 2px;
+}
+
+.nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 0;
+    background: linear-gradient(90deg, #00f5ff, #7cff00);
+    border-radius: 1px;
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* ================================
+   FUTURISTIC GLASS NAVBAR
+================================ */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(-100%);
+  width: calc(100% - 40px);
+  max-width: 1100px;
+  z-index: 1000;
+
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0);
+
+
+  transition:
+    transform 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+    background 0.4s ease,
+    backdrop-filter 0.4s ease,
+    box-shadow 0.4s ease,
+    padding 0.4s ease;
+
+  box-shadow: 0 0 0 transparent;
+}
+
+/* Navbar visible on load */
+.navbar.show {
+  transform: translateX(-50%) translateY(20px);
+}
+
+/* Navbar on scroll */
+.navbar.scrolled {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(20px);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  box-shadow:
+    0 0 20px rgba(0, 245, 255, 0.25),
+    0 0 40px rgba(124, 255, 0, 0.15);
+}
+
+
+/* Inner container */
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 28px;
+}
+
+/* Logo */
+.logo {
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* Links */
+.nav-links {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+}
+
+.nav-link {
+  position: relative;
+  text-decoration: none;
+  color: #cbd5e1;
+  font-size: 0.95rem;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+/* Hover glow */
+.nav-link:hover {
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(0, 245, 255, 0.8);
+}
+
+/* Neon underline */
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(90deg, #00f5ff, #7cff00);
+  border-radius: 2px;
+  transition: width 0.35s ease;
+}
+
+/* Hover underline */
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Active link */
+.nav-link.active {
+  color: #ffffff;
+}
+
+.nav-link.active::after {
+  width: 100%;
+  box-shadow:
+    0 0 10px #00f5ff,
+    0 0 20px #7cff00;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .nav-links {
+    gap: 18px;
+  }
+}
+
+/* ===============================
+   Futuristic Neon Section Headings
+================================= */
+
+.section-heading {
+  font-size: clamp(2.5rem, 5vw, 3.2rem);
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-align: center;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+/* Neon gradient text */
+.neon-heading {
+  background: linear-gradient(
+    90deg,
+    #00f5ff,
+    #7cff00,
+    #00f5ff
+  );
+  background-size: 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: neonFlow 6s linear infinite;
+}
+
+/* Soft glow */
+.neon-heading::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  filter: blur(18px);
+  opacity: 0.6;
+}
+
+/* Animated gradient movement */
+@keyframes neonFlow {
+  0% { background-position: 0%; }
+  100% { background-position: 200%; }
+}
+
+.section-heading::after {
+  content: "";
+  display: block;
+  width: 90px;
+  height: 3px;
+  margin: 14px auto 0;
+  background: linear-gradient(90deg, #00f5ff, #7cff00);
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 245, 255, 0.8);
+}
+
+/* css */
+/* ===== Navbar Responsive ===== */
+
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.menu-toggle span {
+  width: 26px;
+  height: 2px;
+  background: linear-gradient(90deg, #00f5ff, #7cff00);
+  transition: 0.4s;
+}
+
+/* Mobile Navbar */
+@media (max-width: 768px) {
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(15px);
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 25px 0;
+    opacity: 0;
+    transform: translateY(-15px);
+    pointer-events: none;
+    transition: 0.4s ease;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .nav-links.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+}
+
+/* Hamburger animation */
+.menu-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+.loader-neon {
+  text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 20px #0ff, 0 0 30px #0ff;
+}
+
+.loader-bar {
+  width: 0%;
+}
+
+.skill-card {
+  min-width: 140px;
+  flex-shrink: 0;
+  text-align: center;
+}
+
+#skillsCarousel {
+  scrollbar-width: thin;             
+  scrollbar-color: #00f5ff #0b0f1a;       
+}
+
+/* Chrome, Edge, Safari */
+#skillsCarousel::-webkit-scrollbar {
+  height: 8px;
+}
+
+#skillsCarousel::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  backdrop-filter: blur(6px);
+}
+
+#skillsCarousel::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    90deg,
+    #00f5ff,
+    #7cff00,
+    #a855f7
+  );
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 245, 255, 0.6);
+}
+
+#skillsCarousel::-webkit-scrollbar-thumb:hover {
+  box-shadow: 0 0 16px rgba(124, 255, 0, 0.9);
+}
+
+#skillsCarousel {
+  -webkit-overflow-scrolling: touch;
+}
+
+.skill-card {
+  min-width: 180px;
+}
+
+#skillsCarousel {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ============================= */
+/* Hide horizontal scrollbar ONLY on desktop */
+/* ============================= */
+
+@media (min-width: 768px) {
+  #skillsCarousel {
+    scrollbar-width: none;       
+  }
+
+  #skillsCarousel::-webkit-scrollbar {
+    display: none;               
+  }
+}
+
+@media (min-width: 1024px) {
+  #skillsCarousel::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 80px;
+    height: 100%;
+    pointer-events: none;
+    background: linear-gradient(to right, transparent, rgba(0,245,255,0.25));
+  }
+}
+
