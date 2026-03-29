@@ -1,29 +1,19 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  // // Smooth scroll
-  // const lenis = new Lenis({ smooth: true });
-  // function raf(time) {
-  //   lenis.raf(time);
-  //   requestAnimationFrame(raf);
-  // }
-  // requestAnimationFrame(raf);
+  if (typeof Lenis !== "undefined") {
+    const lenis = new Lenis({ smooth: true });
 
-  // Smooth scroll (Vercel safe)
-if (typeof Lenis !== "undefined") {
-  const lenis = new Lenis({ smooth: true });
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
 
-  function raf(time) {
-    lenis.raf(time);
     requestAnimationFrame(raf);
+  } else {
+    console.warn("Lenis not loaded");
   }
 
-  requestAnimationFrame(raf);
-} else {
-  console.warn("Lenis not loaded");
-}
 
-
-  // Skills carousel
   const carousel = document.getElementById("skillsCarousel");
   if (carousel) {
     window.slideLeft = () => {
@@ -34,7 +24,6 @@ if (typeof Lenis !== "undefined") {
     };
   }
 
-  // Typing effect
   const typedText = document.getElementById("typed-text");
   const words = [
     "Web Developer Enthusiast",
@@ -58,8 +47,7 @@ if (typeof Lenis !== "undefined") {
 
     function erase() {
       if (charIndex > 0) {
-        typedText.textContent =
-          words[wordIndex].substring(0, charIndex - 1);
+        typedText.textContent = words[wordIndex].substring(0, charIndex - 1);
         charIndex--;
         setTimeout(erase, erasingDelay);
       } else {
@@ -71,7 +59,6 @@ if (typeof Lenis !== "undefined") {
     setTimeout(type, newWordDelay);
   }
 
-  // Loader
   window.addEventListener("load", () => {
     const loader = document.getElementById("loader");
     const loaderBar = document.getElementById("loader-bar");
@@ -95,7 +82,6 @@ if (typeof Lenis !== "undefined") {
     }, 100);
   });
 
-  // Scroll Down
   const scrollDownBtn = document.getElementById("scroll-down");
   if (scrollDownBtn) {
     scrollDownBtn.addEventListener("click", () => {
@@ -103,7 +89,6 @@ if (typeof Lenis !== "undefined") {
     });
   }
 
-  // Scroll Up
   const scrollUpBtn = document.getElementById("scroll-up");
   if (scrollUpBtn) {
     scrollUpBtn.addEventListener("click", () => {
@@ -111,7 +96,6 @@ if (typeof Lenis !== "undefined") {
     });
   }
 
-  // Navbar
   const navbar = document.getElementById("navbar");
   const navLinks = document.querySelectorAll(".nav-link");
 
@@ -143,7 +127,6 @@ if (typeof Lenis !== "undefined") {
     });
   }
 
-  // Mobile menu
   const menuToggle = document.getElementById("menu-toggle");
   const navMenu = document.getElementById("nav-links");
 
@@ -161,6 +144,24 @@ if (typeof Lenis !== "undefined") {
     });
   }
 
+  /* Fade-up animation on scroll for project cards */
+  const fadeElements = document.querySelectorAll(".fade-up");
+
+  if (fadeElements.length > 0) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add("visible");
+          }, index * 120);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    fadeElements.forEach(el => observer.observe(el));
+  }
+
 });
 
 /* ================================
@@ -170,34 +171,29 @@ if (typeof Lenis !== "undefined") {
 const carousel = document.getElementById("skillsCarousel");
 
 let autoScroll;
-let scrollSpeed = 0.5; // slow & smooth
+let scrollSpeed = 0.5;
 
 function startAutoScroll() {
   autoScroll = setInterval(() => {
     carousel.scrollLeft += scrollSpeed;
 
-    // Reset scroll when end is reached
     if (
       carousel.scrollLeft + carousel.clientWidth >=
       carousel.scrollWidth - 5
     ) {
       carousel.scrollLeft = 0;
     }
-  }, 16); // ~60fps
+  }, 16);
 }
 
 function stopAutoScroll() {
   clearInterval(autoScroll);
 }
 
-// Start auto scroll
 startAutoScroll();
 
-// Pause on hover
 carousel.addEventListener("mouseenter", stopAutoScroll);
 carousel.addEventListener("mouseleave", startAutoScroll);
 
-// Pause on touch (mobile)
 carousel.addEventListener("touchstart", stopAutoScroll);
 carousel.addEventListener("touchend", startAutoScroll);
-
