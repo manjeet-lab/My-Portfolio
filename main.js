@@ -51,15 +51,23 @@ if (themeToggle) {
     if (progress >= 100) {
       clearInterval(interval);
       setTimeout(() => {
-        gsap.to(loader, {
-          opacity: 0,
-          duration: 0.7,
-          ease: "power2.inOut",
-          onComplete: () => {
-            loader.classList.add("hidden");
-            initAnimations();
-          }
-        });
+        // Check if GSAP is available
+        if (typeof gsap !== "undefined") {
+          gsap.to(loader, {
+            opacity: 0,
+            duration: 0.7,
+            ease: "power2.inOut",
+            onComplete: () => {
+              loader.classList.add("hidden");
+              initAnimations();
+            }
+          });
+        } else {
+          // Fallback if GSAP not loaded
+          loader.style.opacity = "0";
+          loader.classList.add("hidden");
+          setTimeout(initAnimations, 700);
+        }
       }, 300);
     }
   }, 90);
