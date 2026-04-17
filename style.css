@@ -42,6 +42,16 @@
   --form-label-color: #64748b;
 }
 
+::selection {
+    background-color: green;  /* Highlight background */
+    color: white;             /* Text color */
+}
+
+::-moz-selection {
+    background-color: green;  /* For Firefox */
+    color: white;
+}
+
 /* =============================================
    BASE RESET & BODY
    ============================================= */
