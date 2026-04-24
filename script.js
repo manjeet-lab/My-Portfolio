@@ -138,7 +138,7 @@ if (typeof Lenis !== "undefined") {
   if (!typedEl) return;
 
   const words = [
-    "Web Developer Enthusiast",
+    "Data Scientist Enthusiast",
     "Data Analyst Enthusiast",
     "BSc AIML Student"
   ];
